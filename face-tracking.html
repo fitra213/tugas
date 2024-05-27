@@ -1,0 +1,177 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+	const list = [ ,"bottled_car", "car", "cartoon_vintage_car_stuts", "dachshundcyberpunk_car", "fallout_car_2", "fallout_car_revisted_and_remade", "futuristic_racing_car_-_molniafrenchbull", "low-poly_truck_car_drifter", "old_rusty_car_2", "puzis-101a_sport_1938ppy"];
+	const visibles = [false, false, false, false, false, false, false, false, false, ,false, true];
+	const setVisible = (button, entities, visible) => {
+	  if (visible) {
+	    button.classList.add("selected");
+	  } else {
+	    button.classList.remove("selected");
+	  }
+	  entities.forEach((entity) => {
+	    entity.setAttribute("visible", visible);
+	  });
+	}
+	list.forEach((item, index) => {
+	  const button = document.querySelector("#" + item);
+	  const entities = document.querySelectorAll("." + item + "-entity");
+	  setVisible(button, entities, visibles[index]);
+	  button.addEventListener('click', () => {
+	    visibles[index] = !visibles[index];
+	    setVisible(button, entities, visibles[index]);
+	  });
+	});
+      })
+    </script>
+    <style>
+      body {
+        margin: 0;
+      }
+      .example-container {
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .options-panel {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2;
+      }
+      .options-panel img {
+	border: solid 3px;
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	cursor: pointer;
+      }
+      .options-panel img.selected {
+	border-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example-container">
+      <div class="options-panel">
+        <img id="bottled_car" src="./assets/car/bottled_car/bottle.png"></img>
+        <img id="car" src="./assets/car/car/car.png"></img>
+        <img id="cartoon_vintage_car_stuts" src="./assets/car/cartoon_vintage_car_stuts/vintage.png"></img>
+        <img id="cyberpunk_car" src="./assets/car/cyberpunk_car/cyber.png"></img>
+        <img id="fallout_car_2" src="./assets/car/fallout_car_2/fcar2.png"></img>
+        <img id="fallout_car_revisted_and_remade" src="./assets/car/fallout_car_revisted_and_remade/revis.png"></img>
+        <img id="futuristic_racing_car_-_molnia" src="./assets/car/futuristic_racing_car_-_molnia/futur.png"></img>
+        <img id="low-poly_truck_car_drifter" src="./assets/car/low-poly_truck_car_drifter/low poly.png"></img>
+        <img id="old_rusty_car_2" src="./assets/car/old_rusty_car_2/old.png"></img>
+        <img id="zis-101a_sport_1938" src="./assets/car/zis-101a_sport_1938/zis.png"></img>
+      </div>
+      <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+          <a-asset-item id="bottled_car" src="./assets/car/bottled_car/scene.gltf"></a-asset-item>
+          <a-asset-item id="car" src="./assets/car/car/scene.gltf"></a-asset-item>
+          <a-asset-item id="cartoon_vintage_car_stuts" src="./assets/car/cartoon_vintage_car_stuts/scene.gltf"></a-asset-item>
+          <a-asset-item id="cyberpunk_car" src="./assets/car/cyberpunk_car/scene.gltf"></a-asset-item>
+          <a-asset-item id="fallout_car_2" src="./assets/car/fallout_car_2/scene.gltf"></a-asset-item>
+          <a-asset-item id="fallout_car_revisted_and_remade" src="./assets/car/fallout_car_revisted_and_remade/scene.gltf"></a-asset-item>
+          <a-asset-item id="futuristic_racing_car_-_molnia" src="./assets/car/futuristic_racing_car_-_molnia/scene.gltf"></a-asset-item>
+          <a-asset-item id="low-poly_truck_car_drifter" src="./assets/car/low-poly_truck_car_drifter/scene.gltf"></a-asset-item>
+          <a-asset-item id="old_rusty_car_2" src="./assets/car/old_rusty_car_2/scene.gltf"></a-asset-item>
+          <a-asset-item id="zis-101a_sport_1938" src="./assets/car/zis-101a_sport_1938/scene.gltf"></a-asset-item>
+        </a-assets>
+        <a-camera active="false" position="0 0 0"></a-camera>
+	<!-- head occluder -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+	  <a-gltf-model mindar-face-occluder position="0 -0.3 0.15"rotation="0 0 0" scale="0.065 0.065 0.065" src="#bottled_car"></a-gltf-model>
+        </a-entity>
+
+        <!-- bottled_car -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="1 1 1" src="#bottled_carModel" class="bottled_car-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="1 1 1" src="#bottled_carModel" class="bottled_car-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        
+        <!-- car -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.45 0.3" scale="0.003 0.003 0.003" src="#carModel" class="car-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.003 0.003 0.003" src="#carModel" class="car-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- cartoon_vintage_car_stuts -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.1 0.1 0.1" src="#cartoon_vintage_car_stutsModel" class="cartoon_vintage_car_stuts-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.1 0.1 0.1" src="#cartoon_vintage_car_stutsModel" class="cartoon_vintage_car_stuts-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- cyberpunk_car -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#cyberpunk_carModel" class="cyberpunk_car-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#cyberpunk_carModel" class="cyberpunk_car-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- fallout_car_2 -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+          <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#fallout_car_2Model" class="fallout_car_2-entity" visible="false"></a-gltf-model>
+      </a-entity> 
+      <a-entity mindar-face-target="anchorIndex: 356">
+          <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#fallout_car_2Model" class="fallout_car_2-entity" visible="false"></a-gltf-model>
+      </a-entity>
+
+        <!-- fallout_car_revisted_and_remade -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.4 0.4 0.4" src="#fallout_car_revisted_and_remadeModel" class="fallout_car_revisted_and_remade-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.4 0.4 0.4" src="#fallout_car_revisted_and_remadeModel" class="fallout_car_revisted_and_remade-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- futuristic_racing_car_ -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 45 0" position="0.15 -0.45 0.5" scale="9 9 9" src="#futuristic_racing_car_-_molniaModel" class="futuristic_racing_car_-_molnia-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 45 0" position="-0.15 -0.45 0.5" scale="9 9 9" src="#futuristic_racing_car_-_molniaModel" class="futuristic_racing_car_-_molnia-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- low-poly_truck_car_drifter -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.0085 0.0085 0.0085" src="#low-poly_truck_car_drifterModel" class="low-poly_truck_car_drifter-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.0085 0.0085 0.0085" src="#low-poly_truck_car_drifterModel" class="low-poly_truck_car_drifter-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- old_rusty_car_2 -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -90 0" position="0.15 -0.35 0.5" scale="0.4 0.4 0.4" src="#old_rusty_car_2Model" class="old_rusty_car_2-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -90 0" position="-0.15 -0.35 0.5" scale="0.4 0.4 0.4" src="#old_rusty_car_2Model" class="old_rusty_car_2-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- zis-101a_sport_1938 -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -180 0" position="0.15 -0.35 0.3" scale="0.0015 0.0015 0.0015" src="#zis-101a_sport_1938Model" class="zis-101a_sport_1938-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -180 0" position="-0.15 -0.35 0.3" scale="0.0015 0.0015 0.0015" src="#zis-101a_sport_1938Model" class="zis-101a_sport_1938-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+
+      </a-scene>
+    </div>
+  </body>
+</html>
